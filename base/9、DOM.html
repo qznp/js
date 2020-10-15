@@ -1,0 +1,112 @@
+<!--
+ * @Descripttion: DOM：文档对象模型，一份html文件在js中就是一个DOM对象（document对象）
+ * @Date: 2020-10-14 14:49:48
+ * @LastEditTime: 2020-10-14 16:06:32
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body id="demo">
+  <!-- 我是注释内容 -->
+  <!-- 我是注释2 -->
+  <p id="p" class="p">一直一直走下去</p>
+  <span>淋着雨</span>
+</body>
+<script>
+  // BOM包含DOM
+  // 节点：组成一份DOM文档的所有内容都是DOM的节点，包括但不仅限于：标签、空格、换行、注释、标签的属性、标签中嵌套的文本
+  // 节点属性：用来描述节点特征的变量：nodeName、nodeType、nodeValue，这三种属性可以用来判断节点的类型
+
+  // 当页面渲染完毕时，执行的事件函数
+  window.onload = function () {
+    // 一、节点特性
+    // 获取已经渲染的节点
+    // childNodes方法只能获取到当前节点下的一级子节点，嵌套的二级节点无法获取
+    // var node = document.childNodes;
+    // console.log(node);
+    // 获取到body标签的所有子节点
+    // console.log(document.body);
+    // console.log(document.body.childNodes);
+    // firstChild:获取当前元素节点的第一个子节点
+    // lastChild:获取当前元素节点的最后一个子节点
+    // ownerDocument：获取当前节点的文档根节点，相当于document
+    // parentNode：获取当前节点的父节点
+    // previousSibling：获取当前节点的前一个同级节点
+    // nextSibling：获取当前节点的后一个节点
+    // 节点种类：元素节点（nodeType=1，nodeName属性值是标签名，nodeValue属性值是undefined或null），文本节点（nodeType=3，nodeName属性值是#text，nodeValue属性值是文本本身），注释节点（nodeType=8，nodeName属性值是#comment，nodeValue=注释的内容）
+    // document.title = '百度一下'
+    // console.log(document.head);
+    // console.log(document.URL);//获取完整的URL
+    // console.log(document.domain); //获取域名
+
+    // 二、节点操作
+    // var p = document.querySelector('#p');
+    // console.log(p.nextSibling);
+    // 通过js创建一个标签
+    var pTag = document.createElement('p');
+    pTag.id = 'p1';
+    pTag.className = 'pp';
+    pTag.innerHTML = '我是新创建的p元素';
+    var textNode = document.createTextNode('我是新的子元素呦');
+    pTag.appendChild(textNode);
+    document.body.appendChild(pTag);
+
+    var aTag = document.createElement('a');
+    aTag.href = 'http://www.baidu.com';
+    aTag.innerHTML = '百度一下';
+    // 将a标签插入到p标签前面
+    document.body.insertBefore(aTag,pTag);
+
+    var spanTag = document.createElement('span');
+    spanTag.innerHTML = '我是来替换a的';
+    // 使用span标签来替换a标签，replaceChild(新标签，老标签)
+    document.body.replaceChild(spanTag,aTag);
+    // 由父标签删除子标签，removeChild方法会把当前上传的标签返回出来，将来还可以通过这个变量获取到被删除的标签
+    // document.body.removeChild(pTag);
+    // 哪个标签调用就删除它本身
+    pTag.remove();
+    // 三、文档写入操作：write
+    // 在页面正在渲染时，使用write方法向页面中写入数据，并不会影响已渲染出来的数据
+    // 当页面渲染完毕时，使用write方法向页面中写入数据，js会认为已渲染数据作废，用write方法中的参数覆盖已渲染的数据
+    // document.write('hello');
+    // 给标签赋值，可以使用innerHTML和innerText
+    // innerHTML中除了可以给标签设置普通字符串外，如果字符串中包含标签，标签会被解析出来。如果标签中嵌套子标签，则会吧这些标签当做字符转换样式，联通文本一起输出
+    // innerText中如果字符串包含了标签，这标签原样显示，并不会被解析（浏览器厂商联盟私自定义的方法，有兼容性问题）。如果标签中嵌套子标签，则只获取标签里的文本
+
+    // outerHTML厂商联盟标准
+
+    // 四、查找文档中的元素
+    // 查询标签的范围是整个html文件，也就是在document范围中搜索指定的标签，所以要使用document对象调用相关查找方法
+    
+    // document.getElementById();// 因为W3C协议规定id值唯一，所以通过id获取标签。只能获取一个标签，如果页面汇总出现同名id，则只获取匹配的第一个标签
+    // document.getElementByTagName();// 通过标签名获取标签，可以获取到页面中所有的同名标签，返回值是一个类似于数组的数据类型，吧所有匹配到的标签按照先后顺序，利用下标管理起来
+    // document.getElementsByClassName();// 通过class名获取标签
+    // document.getElementsByName();// 通过name属性值获取input类型（from表单）的标签
+    // 通过标签的选择器获取标签
+    // document.querySelector();// 不管页面中参与匹配的标签有几个，只能拿到第一个匹配的标签
+    // document,querySelectorAll();// 可以获取到页面中所有参与匹配的标签
+    // 获取元素中的属性值
+    // element.getAttributeNode('属性名');
+    // element.attributes['属性名'];
+    // element.attributes.getNamedItem('属性名');
+    // 设置元素中的属性值
+    // element.setAttribute('属性名','属性值');
+
+    // 五、标签下的常见属性
+    // tagName属性：保存的是当前标签的名字
+    // var pTag = document.getElementById('p');
+    // console.log(pTag.tagName);
+    // 标签中的style属性：保存的是标签的样式信息（CSS代码）
+    // 只能通过行内样式
+    // 因为通过访问js访问style属性时标签下的style属性，所以只能获取到行内演示，如果该标签的样式是其它演示表设置的，则无法获取对应的值
+    // console.log(pTag.style.color);
+    // console.log(pTag.offsetWidth);
+    // console.log(pTag.offsetHeight);
+    // pTag.style.backgroundColor = 'red';
+  }
+</script>
+</html>

@@ -1,0 +1,120 @@
+<!--
+ * @Descripttion: BOM浏览器对象模型，包含window对象、location对象、screen对象、history对象以及navigator对象
+ * @Date: 2020-10-14 09:27:55
+ * @LastEditTime: 2020-10-14 14:40:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="getLocation" type="button" name="button">获取窗口位置</button>
+  <button id="getSize" type="button" name="button">获取窗口宽高</button>
+  <button id="open" type="button" name="button">打开百度</button>
+</body>
+<script>
+  // 全局作用域：在js中，所有定义在函数以外的变量都属于window对象下的属性，而因为window对象作用域（可访问的位置）是当前整个html页面（当前页面的窗口），所以变量就能在当前的html页面任何一个位置被获取到。函数同样道理：如果该函数不属于任何其他的对象，则该函数一定属于window对象，这个函数也就可以在当前html页面的任何一个位置被调用。
+
+  // 一、window对象的常用属性和方法
+  // 以下属于window下的方法、属性，在取值调用时一般可以省略window，但是如果需要区分属性、方法的归属，则要吧window对象加上
+  // 1、获取浏览器窗口坐标：screenX、screenY（在老版火狐中，必须使用screenX、screenY获取坐标其他浏览器还可以通过screenLeft、screenTop获取坐标）
+  var getLocation = document.getElementById('getLocation');
+  getLocation.onclick = function () {
+    console.log(window.screenX);
+    console.log(window.screenY);
+  }
+  // 2、获取浏览器窗口宽高：innerWidth，innerHeight（获取的宽高并不是完整的浏览器窗口，而是用来渲染html页面的区域尺寸）
+  var getSize = document.getElementById('getSize');
+  getSize.onclick = function () {
+    console.log(window.innerWidth);
+    console.log(window.innerheight);
+  }
+  // 3、通过js打开页面的方法：window.open();
+  // 第一个参数：设置打开的URL链接（必填项）
+  // 第一个参数：设置在哪个窗口，选项卡下打开新链接（可选）
+  // 第一个参数：设置打开的新窗口的坐标、尺寸，提供的功能等信息（可选）
+  var openTag = document.getElementById('open');
+  openTag.onclick = function () {
+    window.open('http://www.baidu.com','','width=500px,height=1500px,left=100px,top=100px')
+  }
+  // 4、警告框：给用户以弹窗的形式提示警告信息，用户关闭窗口后，我们获取不到任何用户操作产生的数据
+  // alert('hhhh');
+  // 5、判断框：给用户以弹窗的形式提示警告信息后，用户可以同意或者不同意该信息，我们能获取用户操作产生的数据，确认：true，取消：false
+  var bol = confirm('是否同意以上需求？');
+  console.log(bol);
+  // 6、信息收集框：以弹窗的形式，让用户输入一段简单的文本，我们可以获取到这段输入的文本信息。如果用户点击确认按钮，则返回用户输入的数据，如果用户没有输入直接点击确认，则获取到的是字符串；如果用户店家取消（关闭）按钮，返回null
+  // 函数需要两个参数：第一个表示要输入文本的提示信息，第二个表示默认情况下的文本
+  var str = prompt('请输入姓名','哈哈');
+  // 7、定时器：让某段代码按照定时器设定的时间执行，主要分为循环定时器、延时定时器
+  // 循环定时器：相当于for循环，可以让某段代码重复执行，区别是：可以设置两次执行的时间间隔
+  // 7.1 循环定时器
+  // var timer = setInterval(function () {
+    // 函数体
+  // },3000);
+  // 第一个参数是函数类型：吧需要重复执行的代码封装在这个函数中，一般是匿名函数
+  // 第二个参数是number类型：以毫秒为单位的时间
+  // 延时定时器：让某段代码推迟一段时间再执行
+  // clearInterval(timer);取消循环定时器，参数是开启定时器时保存的定时器id
+  // 7.2 延时定时器
+  // var timer = setTimeout(function () {
+    // 函数体
+  // },3000);
+  // 第一个参数是函数类型：需要延迟执行的代码
+  // 第二个参数是number类型：以毫秒为单位的时间
+  // clearTimeout(timeer):清除延时定时器的方法，参数是延时定时器的id
+
+  // 二、location对象中的属性、方法操作时浏览器的URL区域
+  // 1、属性
+  // location.hash:获取到url中#后的字符串
+  // location.host:返回服务器的域名和端口号
+  // location.hostname:返回不包含端口号的域名
+  // location.href:但会当前页面的完整url
+  // location/toString():href属性一致
+  // location.pathname:获取url目录（文件）名
+  // location.port:获取url中的端口号
+  // location.protocol:返回协议名
+  // location.search:返回get请求参数
+  // 2、方法
+  // location.assign('http://www.baidu.com');在当前页面打开指定的url链接，并会保存在浏览器的历史记录中
+  // location.href = 'http://www.baidu.com';与assign方法等同
+  // location = 'http://www.baidu.com';与assign方法等同
+  // location.replace('http://www.baidu.com'); 通过该方法修改的页面，不会被历史记录保存，也就是点击后退按钮，不会返回到上一个页面
+  // location.reload(); 没有参数，重新加载页面会从浏览器缓存中重新加载，有参数，参数为true，重新发送一次请求，从服务器下载新的页面并加载进浏览器
+
+  // 三、screen对象：设备的屏幕对象，常通过该对象下的属性和方法获取屏幕尺寸信息
+  // 一般用在浏览器移动端开发时获取移动设备的屏幕尺寸信息，因为移动设备屏幕比例种类多，必要情况下需要手动计算屏幕尺寸，安排元素布局为止
+  // 1、screen.availHeight/screen.availWidth:获取的屏幕的总高、宽减去系统组件所占的高度、宽度（浏览器可以占用的宽高）
+
+  // 四、history对象：history下的方法常用于操作页面在历史记录中的各个页面间的跳转操作
+  // history.go(-1); //后退一页 history.back()
+  // history.go(1); //前进一页 history.forword()
+  // history.go(2); //前进两页
+
+  // 用来检查当前浏览器是否支持history API，如果不支持的话，可以考虑使用polyfill库history.js
+  // if (!!(window.history && history.pushState)){
+  //   // 支持History API
+  // } else {
+  //   // 不支持
+  // }
+  // history.pushState(state,title,url); //是在历史记录中增加一条新的记录
+  // history.replaceState(state,title,url); //是将当前的历史记录给替换掉
+  // state:一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null
+  // title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填写null
+  // url:新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址
+  
+  // 五、navigator对象：识别客户端浏览器的事实标准
+  console.log(navigator.appCodeName); //浏览器代码名的字符串表示
+  console.log(navigator.appName);//官方浏览器名
+  console.log(navigator.appVersion);//浏览器版本信息
+  console.log(navigator.systemLanguage); //操作系统的语言
+  console.log(navigator.Language);//浏览器的主语言
+  console.log(navigator.onLine);//是否联网
+  console.log(navigator.cookieEnabled);//如果启用cookie返回true，否则返回false
+  console.log(navigator.platform);//浏览器所在计算机平台的字符串表示
+  console.log(navigator.plugins);//安装在浏览器中的插件数组
+  console.log(navigator.userAgent);//用户代理头
+</script>
+</html>

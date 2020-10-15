@@ -1,0 +1,38 @@
+<!--
+ * @Descripttion: 变量
+ * @Date: 2020-10-12 10:40:40
+ * @LastEditTime: 2020-10-12 10:48:59
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 什么事变量？
+  // 声明变量   变量名
+  // int a = 12;
+  var a;//变量声明
+  a=12.12//给声明的变量赋值
+  // 在控制台中打印变量的值，log:函数
+  console.log(a);
+  // 以报错的形式打印变量的值
+  console.error(a);
+  // 以警告的形式打印变量的值
+
+  // 我们在定义变量时，不能在同一级作用域中定义两个同名的边浪（因为js是弱语法语言，所以可以定义同名变量，但是不要这样做，因为会产生变量覆盖的现象）
+  var a = 'hello';
+  console.log(a);
+
+  // 在js中变量定义出来后，这个变量可以存放任意类型的数据，但是尽量存在同类型的数据，以保证代码的可读性 
+  var a = '14';
+  console.log(a);
+  a = 12;
+  console.log(a);
+</script>
+</html>

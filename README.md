@@ -7,3 +7,5 @@ js 的问题总结
 ## keyCode.html:js 实现回车搜索的两种方法
 
 ## input.html:js 防抖与节流
+
+## base 文件内为 js 基础

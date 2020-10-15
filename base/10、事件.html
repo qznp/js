@@ -1,0 +1,156 @@
+<!--
+ * @Descripttion: 事件，鼠标事件和键盘事件,表单事件
+ * @Date: 2020-10-14 17:28:49
+ * @LastEditTime: 2020-10-15 10:11:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #wrap {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+  }
+  #content {
+    width: 300px;
+    height: 300px;
+    background-color: yellow;
+  }
+  #divWrap {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+  }
+</style>
+<body>
+  <div id="div">事件</div>
+  <div id="wrap">
+    <div id="content">
+      <div id="divWrap"></div>
+    </div>
+  </div>
+</body>
+<script>
+  // window.onload事件：当浏览器把html页面渲染完毕时，会触发该事件。所有对页面元素的操作，必须要等页面渲染完毕再执行，如果页面没有渲染完毕，可能操作的元素就获取不到。
+  // 给事件绑定事件函数
+  // 所有标签都具备完整的事件，但是不一定所有的事件都有默认的事件函数（a标签的点击事件，具备默认的事件函数，但div标签点击事件没有），我们给标签的某个事件绑定一个函数，将来该事件被触发时就可以执行这个函数，页面上也产生相应的变化。
+  window.onload = function () {
+    var divTag = document.querySelector('#div');
+    divTag.onclick = function (ev) {
+      // 获取用户触发的事件对象：标准写法：window.event;兼容火狐写法：函数传参数，当用户触发事件时，可以通过参数获取到当前事件对象
+      // 实现代码兼容性的思路：先判断浏览器是否支持A方法，支持就用A，否则就换其他代码
+      // 鼠标事件对象下常用的坐标属性：
+      // clientX/Y:坐标原点的浏览器渲染页面区域的左上角点（如果页面发生了折叠，client只能拿到可视区域的坐标数据，而page可以吧被遮挡区域的距离一起获取到）
+      // screenX/Y:坐标原点在屏幕的左上角位置，可以获取到用户点击的点在屏幕上的哪个区域
+      var e = ev || window.event;
+    }
+
+    // 一、鼠标事件
+    // click：点击事件
+    // mousedown：鼠标按下事件
+    // mouseup：当鼠标抬起时触发
+    // 如果同时给标签绑定了down/up/click三个事件函数，则用户在完成一次点击事件时，事件的触发次序是：down-up-click
+    // mouseover:鼠标从标签外一道内部，触发一次该事件
+    // mouseout:鼠标移出事件
+    // mouseenter:对应的是mouseover事件，因为over补鞥呢很好的描述鼠标移入的时间行为，所以在es5中，使用enter单词描述鼠标移入的行为，使用mouseleave来和mouseenter对应
+    // mousemove：鼠标移动事件
+    // dbclick:鼠标的双击事件
+    // contextmenu：鼠标右击事件（一般用来换气菜单使用）
+    // 阻止标签的默认事件函数
+    // return false;
+
+    // 二、键盘事件
+    // keydown:键盘按键按下
+    // keyup：键盘按下后抬起
+    // event.keyCode:时间对象中的keyCode属性保存的是该按键的唯一编码，number类型，所有系统的键盘编码完全一致
+    // 组合键：ctrl alt shift,这三个按键，单按一般没有特殊的含义，使用组合键加一个其他功能键实现制定的效果
+    document.onkeydown = function () {
+      // console.log(event.keyCode)
+    }
+    // 同时获取到功能键和组合键的事件对象
+    document.onkeydown= function(ev){
+      // 判断按下组合键
+      var e = event || ev;
+      if (e.ctrlKey && e.keycode == 13) {
+        // alert('同时组合按下')
+      }
+    }
+
+    // 三、表单事件
+    // onfocus:输入框被激活的事件
+    // onblur:输入框取消激活的事件
+    // onsubmit：form表单的事件，并不是submit按钮的事件
+    // form.onsubmit = function (ev) {
+      // 可以阻止默认事件，但这种写法仅仅适用于on，没有兼容性问题
+      // return false;
+
+      // 使用事件对象下的preventDefault函数阻止默认事件函数被触发，不兼容IE6-8
+    //   var e = event || ev;
+    //   e.preventDefault();
+    // } 
+
+    // 四、事件绑定方法
+    // 一个标签元素处理完事件之后，它的父元素、父元素的父元素也都会处理事件
+
+    // DOM0级绑定事件和DOM2级绑定事件的区别：
+    // DOM0级给同一个标签的同一个时间，只能绑定一个事件函数，如果有多个，这最后绑定的函数会覆盖前边的函数
+    // DOM2级可以给同一个标签的同一个时间绑定不同的事件函数，触发顺序按照绑定的顺序触发
+
+    // DOM0级解绑事件和DOM2级解绑事件的区别：
+    // DOM0级解绑事件的函数，只需要给该事件赋值为null即可
+    // DOM2解绑事件的函数，需要使用removeEventListener()函数来移除时间，第一个参数是要移除的事件名，第二个参数是要移除该事件下的函数名，第三个参数可选：根据绑定事件函数时的行为（冒泡 false、下沉 true），填写对应的布尔值（绑定该事件函数时，使用的是true，则在移除时，也需要设置true，但是可省略）
+    
+    var divTag = document.querySelector('#div');
+    // divTag.onclick = function () {
+    //   alert('DOM0')
+    // };
+    // divTag.onclick = null;
+    function demo() {
+      alert('DOM2')
+    }
+    // divTag.addEventListener('click',demo);
+    // divTag.removeEventListener('click',demo);
+
+    // 五、事件冒泡
+    // 事件捕获
+    // 当用户触发某件事件后，会从根标签开始逐层向子标签寻找触发该事件的标签，这个从外到内寻找触发事件标签的过程就是事件捕获，时间捕获执行完毕后，会执行冒泡机制
+
+    // 事件冒泡
+    // 当某个子标签的事件被用户触发后，在执行完绑定在该标签的函数后，会依次触发所有的父标签上的事件，一直把该事件传递到根标签，在这个标签嵌套关系链上，如果某一级标签绑定了同名的事件，则会执行该事件的函数，执行完毕后，继续向上一级传递
+
+    // 利用事件冒泡会简化部分标签的事件函数绑定操作，吧本来应该添加在子标签的事件函数转移到父标签，通过触发子标签事件，冒泡机制会把该事件传递在父标签中，执行对应的函数，在函数里根据子标签的类型，执行不同的功能逻辑。（简化事件函数绑定操作）（事件委托）
+
+    // 如果父子标签给同一个事件绑定了函数，则为防止触发子标签事件，同事执行父标签的函数，会阻止事件冒泡机制
+    var wrap = document.querySelector('#wrap');
+    wrap.addEventListener('click',function () {
+      // alert('红色')
+    },true);
+    var content = document.querySelector('#content');
+    // content.onclick = function () {
+    //   // 取消事件冒泡
+    //   alert('黄色');
+    //   event.cancelBubble = true;
+    // }
+    content.addEventListener('click',function () {
+      // alert('黄色');
+    },true);
+    var div = document.querySelector("#divWrap");
+    // div.onclick = function (ev) {
+    //   alert('我是绿色标签');          
+    //   var e = event || ev;       
+    //   // 阻止绿色标签的事件冒泡
+    //   e.cancelBubble = true;
+    //   e.stopPropagation();
+    //   // console.log(event);
+    // }
+    div.addEventListener('click',function(){
+      // alert('我是绿色');
+    },true)
+  }
+</script>
+</html>

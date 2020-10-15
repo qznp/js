@@ -1,0 +1,62 @@
+<!--
+ * @Descripttion: 表达式与运算符
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-10-12 11:48:53
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-10-12 17:36:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // var s = 12;
+  // var d = true;
+  // console.log(s+d);
+
+  // 如何获取到指定位上的数字
+  // 先把该位上的数字转到个位，然后进行模10运算，运算结果取整数即可
+  // 1234
+  // var ge = 1234 % 10;
+  // console.log(ge);
+  // var shi = parseInt(1234 / 10 % 10);
+  // console.log(shi);
+  // var bai = parseInt(1234 / 100 % 10);
+  // var qian = parseInt(1234 / 1000 % 10);
+  // console.log(ge + shi + bai + qian) 
+
+  // 一元运算符：只需要一个操作数就可以完成的运算
+  var a = 1;
+  // 自增（自减）就是对变量本身进行加一（减一）操作
+  // 注意：如果执行自增（自减）操作是有其他的运算，如果自增（自减）在前，就先加一（减一），然后执行其他运算，如果自增（自减）在后，则先进行其他运算，然后再对本身进行加一（减一）操作
+
+  // 赋值运算符：给一个变量设置一个值，把赋值号右边的值赋给左边
+  // var a = 12;
+  // var b = 24;
+  // var c;
+  // c = a;
+  // a = b;
+  // b = c;
+
+  var num1 = 23;
+  var num2 = 25;
+  var num3 = 27;
+  // 此处和num3进行比较的并不是num2的值，而是num1和num2的比较结果（true）
+  var bol = num1 <= num2 <= num3;
+  console.log(bol);
+
+  // "=="和"==="的区别
+  // "==":如果等号左右两边的类型不一致，则先进行类型转换，然后再判断是否相等
+  // "===":判断是否绝对相等（全等），如果等号两边类型不一致，则不再进行类型转换，直接返回false
+
+  // 逻辑与运算本质就是再寻找结果为false的表达式，如果找到该表达式，就把这个表达式的结果返回到变量中，如果所有的表达式结果都为真，则吧最后一个表达式的结果返回到变量中
+  // 逻辑或：只要在运算符两边找到一个针织，则返回这个真值
+</script>
+</html>

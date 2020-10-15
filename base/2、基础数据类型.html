@@ -1,0 +1,120 @@
+<!--
+ * @Descripttion: 数据类型
+ * @Date: 2020-10-12 10:49:43
+ * @LastEditTime: 2020-10-12 11:45:57
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 基本类型：Number,String,Boolean,null,undefined
+  // 引用类型：Object（function，array，Data）
+  // es6新增类型：Symbol,这种类型的对象永不相等，即始创建的时候传入相同的值，可以解决属性名冲突的问题，作为标记
+  // 谷歌67版本中出现一种bigint,是指安全存储，操作大整数
+
+  // typeof:js给我们提供的一个获取变量数据类型的操作符，我们通过该操作符，获取变量的数据类型
+  // console.log(typeof a);
+  // var b = 1;
+  // console.log(typeof b);
+
+  // null:空。除非程序员手动创建一个变量，并且把改变量赋值为null，否则不会遇到变量为null的情况
+  // 什么时候会给变量赋值=null？
+  // 当我们不需要再使用某个变量的值时，就可以使用null来覆盖该变量之前存放的值
+  // var a  = 12;
+
+  // 如何产生布尔类型的值？
+  // 1、手动给一个变量赋值，值是true或false
+  // 2、通过比较运算、逻辑运算，这些运算结果都会产生一个布尔类型的值
+
+  // 布尔类型值的含义？
+  // true 真，也就是当前表达式成立的时候
+  // false 假，也就是当前表达式不成立的时候
+
+  // 布尔类型的使用场景？
+  // 1、在程序控制语句中通过布尔类型来决定代码该怎么执行
+  // 2、判断表达式是否成立
+  // var a = 12 + 13;
+  // console.log(a);
+  // var bol = 12 == 13;
+  // console.log(bol);
+  
+  // var num = 111;
+  // js中的number类型，包含两个特殊的状态值：正无穷和负无穷，因为这两个值没有具体的数字能表示，所以这两个值只是一种状态，表示该变量的数值大小无限大或无限小（并没有实际用处）
+  // var num = Infinity;
+  // var num = -Infinity;
+  // console.log(num);
+
+  // var flo = 3.1415926;
+  // 在js中我们可以使用指数计数法来表示一个小数或一个整数，但是不实用
+  // flo = 31415926e-7;
+  // console.log(flo);
+
+  // NaN:not a Number
+  // var a = 12/0;
+
+  // 通过单引号或者双引号把一段字符包裹起来，就形成了字符串
+  // var str = 'hhhhh';
+  // console.log(str);
+
+  // 转义字符，在程序中会把一些特殊的符号赋予其他含义（单引号在js中的特殊含义就是包裹一组字符串），如果需要转换这些特殊字符的含义，就会用到转义字符串进行转义
+  // 如何转义：在特殊字符前添加一个'\'
+  // 常见的转义字符：\n 回车  \' 字符单引号  \"字符双引号
+  // var str1 = 'hhh:\'一直\''
+  // console.log(str1)
+
+  // 显示类型转换：通过相关函数吧变量的类型转换为另一个类型
+  // 转布尔类型：使用boolean()函数转换
+  // var str = '111';
+  // 函数用法：把要转换的变量当做函数的参数，函数就会放回对象的布尔值
+  // var bol = Boolean(str);
+  // console.log(bol);
+
+  // 转number类型：通过Number()函数进行显示转换
+  // var bol = null;
+  // var num = Number(bol);
+  // console.log(num);
+
+  // 如果使用Number()函数吧字符串转为number类型，字符串必须是纯数字，如果有其他字符，则转完的结果是NaN
+  // 我们可以借助parseInt（）或者parseFloat()函数吧字符串转为number类型，这两个函数会尽力转换（从左往右查找字符，如果是数据就转换，遇到非数字，就停止转换）
+  // var str = '12.23s12';
+  // var num = parseFloat(str);
+  // console.log(num);
+
+  // 转string类型：使用String()函数转换
+  // var a = undefined;
+  // var str = String(a);
+  // console.log(str);
+
+  // 经打印验证：显示类型转换并不是直接把原变量的类型转换为其他类型，而是吧原变量中的值转换为其他类型后，放在另一个变量中，原变量不受影响（隐式转换同理）
+
+  // 隐式转换
+  // 1、布尔类型
+  // undefined   false
+  // null false
+  // 数值 0 0.0 NaN  false; 其他数值 true
+  // 字符串 "" false;"saa" true
+  // 其他对象 true
+
+  // 2、数值类型
+  // undefined  NaN
+  // null 0
+  // 字符串 '342' == 342; '342as342' == NaN  '' == 0
+  // 布尔类型  true == 1  false == 0
+
+  // 3、字符串类型
+  // undefined == "undefined"  null == "null"
+  // 布尔类型  true == 'true'  false == 'false'
+  // 数值类型转成字符串  123 == '123' NaN == 'NaN'
+  console.log(isNaN('123'));
+  console.log(isNaN(Number('as')));
+
+ 
+</script>
+</html>

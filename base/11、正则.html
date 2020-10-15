@@ -1,0 +1,88 @@
+<!--
+ * @Descripttion: 正则表达式：用来验证字符串是否符合要求的一种语法结构，正则可以用在任何一门开发语言中，进行字符串验证；正则表达式就是使用正则语法书写的一种表达式
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-10-15 10:24:28
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-10-15 11:01:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 使用构造函数创建正则对象
+  var reg = new RegExp('firm','i');
+
+  // 使用字面量创建正则
+  var reg1 = /firm/g;
+  // 第一个参数：验证规则，需要让字符串中必须出现的字符类型
+  // 第二个参数：是验证规则的修饰符（i:匹配时忽略大小写；g:执行时全局匹配）
+
+  // 使用test（）函数验证待测字符串，获取到匹配的字符返回true，否则返回false
+  // var str = reg1.test('this is a firm');
+  // console.log(str);
+
+  // 使用exec()函数验证待测字符串，获取到匹配的字符并返回，如果没有则返回false
+  // var str = reg1.exec('this is a firm');
+  // console.log(str[0]);
+
+  // 使用正则和exec函数，获取指定字符出现的次数
+  var demoStr = 'hello,i like a firm ,this is good firm, this firm is very good';
+  // var str = reg1.exec(demoStr);
+  // var count = 0;
+  // while (str != null) {
+  //   count++;
+  //   str = reg1.exec(demoStr);
+  // }
+  // console.log(count); 
+  
+  var str = 'hello world';
+  // 根据正则表达式进行查找替换
+  // var str1 = str.replace(/hello/, 'a');
+  // console.log(str);
+  // console.log(str1);
+
+  // 根据正则表达式进行查找，返回出现的位置，找不到就返回-1
+  // var str2 = str.search('/hello/');
+  // console.log(str);
+  // console.log(str2);
+
+  // 输出结果类似于exec（），要不返回一种类似于数组的值，要不返回null
+  // var str3 = str.match(/hello/);
+  // console.log(str);
+  // console.log(str3);
+
+  // ():出现在小括号中的字符必须原样匹配，否则验证不通过
+  // |：连接若干个验证规则，只要其中一个城里，就通过验证
+
+  // []:只要字符串中有一个字符串和中括号里任意一个字符匹配，则验证通过
+  // -：表示一段范围，如0-9（所有数字） A-z（所有的字母）
+  // 在方括号中的^:除了方括号中指定的字符以外，其他字符能通过验证
+  // 出现在正则开始位置的^:以该符号后指定的正则开头
+
+  // 元字符：把一些字符抽出来赋予特殊的含义，这些字符就是元字符（相当于转义字符）
+  // \w：任何字母、数字、下划线 [A-z0-9_]
+  // \W：任何非字母、数字、下划线
+  // \d：任何数字 [0-9]
+  // \D：任何非数字 [^0-9]
+  // \s：空白字符
+  // \S：非空白字符
+  // \b：查找单词边界
+  // \B：查找非单词边界
+
+  // 量词：表示验证规则重复次数，控制验证规则验证位置的字符
+  // ^:以xx为开头的字符串 
+  // $:表示验证字符串的结尾必须以$前指定的规则为结尾
+  // +：表示加号前的验证规则必须匹配至少一次
+  // {x}:表示大括号前的验证规则必须匹配x次（x次为连续的）
+  // {x,y}:表示大括号前的验证规则必须匹配x-y次
+
+</script>
+</html>
