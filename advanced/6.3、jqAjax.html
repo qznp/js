@@ -1,0 +1,69 @@
+<!--
+ * @Descripttion: jq的数据请求
+ * @Date: 2020-10-20 14:45:08
+ * @LastEditTime: 2020-10-22 16:02:37
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="content"></div>
+</body>
+<script src="./jquery-1.8.3.min.js"></script>
+<script>
+  // load():由页面中的标签对象调用，该方法被用来加载存放服务器中的静态文件（一般指的是HTML代码片段），当请求到这份文件后，会把文件中的数据拼接进调用的标签中去
+  // 参数一：必选，要引入的静态文件路径，字符串类型
+  // 参数二:可选,接口所需的参数,对象类型
+  // 如果该方法传递了参数,则请求方法会变成post请求,如果要发送带参的get请求,这接口参数拼接在url之后
+  // 参数三:可选,请求结束时的回调函数(不管请求是否成功,都会触发该回调)
+  // 回调函数中有两个参数;在请求成功时,第一个参数保存请求到的数据,第二个参数保存的是'success'字符串;在请求失败时,第一个参数保存失败的原因,第二个参数保存'error'字符串
+  // $('#content').load('./data.html', function (data, status, xhr) {
+  //   if (status == 'error') {
+  //     $('#content').text('404');
+  //   }
+  // })
+  
+  // get():发送get请求的方法
+  // $.get('./data.json',{
+  //   user:'zhansan',
+  //   pwd:1212
+  // }, function (data, status, xhr) {
+  //   console.log(data);
+  // }, 'json');//返回数据类型（xml/html/json/text）
+
+  // getJSON():发送get请求，接受json数据
+  // $.getJSON('./data.json', function (data, status, xhr) {
+    
+  // })
+
+  // 使用jsonp进行跨域 
+  // $.ajax({
+  //   url:'./data.json',
+  //   data:'callback=?',//指定回调函数的属性名以及值，jq会自动把？替换为相应的函数名
+  //   dataType:'jsonp',//指定数据格式
+  //   jsonp:'callback',//指定回调函数的属性名
+  //   success:function(result){
+  //     console.log(data);
+  //   }
+  // })
+
+  $.ajax({
+    type: 'get',
+      url: 'url',
+      dataType: 'json',
+      data: {
+        hourList: hourIdList
+      },
+      async:true,//同步异步
+      traditional:true,//true数组参数带中括号，false数组参数不带中括号，
+      success:function(result){
+        console.log(result);
+      }
+  })
+
+</script>
+</html>

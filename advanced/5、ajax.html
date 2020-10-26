@@ -1,0 +1,54 @@
+<!--
+ * @Descripttion: 原生ajax请求:通过js语法实现的异步网络请求技术，实现页面的局部更新（传统的form表单请求数据、a标签请求数据等手段都是更新整个页面）
+ * @Date: 2020-10-16 14:51:58
+ * @LastEditTime: 2020-10-16 15:36:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 异步：当代码执行到耗时操作时，先后执行其他代码，等耗时操作处理完毕，再通过回调函数来处理耗时操作的结果
+  // 同步：当代码执行到耗时操作时，代码暂停执行，等耗时操作执行完毕，再继续向后执行
+  // 创建ajax请求对象
+  // var xhr = new XMLHttpRequest();
+  // console.log(xhr);
+  // ie6-8的创建对象方法
+  // var obj = new ActiveXObject('Microsoft.XMLHTTP');
+  // console.log(obj);
+  // 1、兼容性写法创建请求对象
+  var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :new ActiveXObject('Microsoft.XMLHTTP');
+  // 2、配置请求方法、请求路径、是否异步请求
+  // 第一个参数：设置请求方法GET/POST
+  // 第二个参数：请求路径，相对路径\绝对路径
+  // 第三个参数：配置请求是否为异步请求，默认不给值时为true，表示异步请求，false为同步请求
+  // 通过ajax发送get请求，浏览器会首先获取到请求路径，用这个路径去匹配缓存中的请求记录，如果记录中存在一个一模一样的请求路径，则吧记录中缓存的服务器返回值发送回来，只有在没有找到对应记录的情况下，才会想服务器发送请求数据
+  xhr.open('GET', './data.json?username='+encodeURI('zhansan') , true);
+  // xhr.open('POST', 'data.json', true);
+  // 3、发送请求,因为当前发送的get请求把参数设置在接口之后，send函数中不需要发送参数了，所以在send参数位置传null，表示没有任何数据
+  xhr.send(null);
+  // xhr.send('username=zhansan');
+  // 4、监听xhr对象下的一个时间，给xhr绑定一个事件函数，该事件只要收到服务器的返回信息就会触发一次
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // 同时满足以上条件，表示服务器已经吧数返回下来
+      console.log(xhr.responseText);
+    }
+  }
+
+  // 跨域
+  // 1、jsonp跨域
+  // 创建script标签
+  var scriptTag = document.createElement('script');
+  // 2、配置标签属性
+  scriptTag.type = 'text/javascript';
+  scriptTag.src = 'http://www.baidu.com';
+  document.head.appendChild(scriptTag);
+</script>
+</html>

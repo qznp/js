@@ -1,0 +1,45 @@
+<!--
+ * @Descripttion: 闭包：在函数执行完毕后向外返回另一个函数。在返回的函数中，使用到一个局部变量，因为承接这个返回函数的变量时全局的，伪类保证全局变量正常访问，所以全局变量中所引用的局部变量生命周期也被无线的延长。
+ * @Date: 2020-10-16 13:46:38
+ * @LastEditTime: 2020-10-16 13:56:52
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn" type="button" name="button">按钮1</button>
+    <button class="btn" type="button" name="button">按钮2</button>
+    <button class="btn" type="button" name="button">按钮3</button>
+    <button class="btn" type="button" name="button">按钮4</button>
+</body>
+<script>
+  // 闭包
+  function fn1() {
+    var i = 12;
+    function fn2() {
+      return i + 3;
+    }
+    return fn2;
+  }
+  var result1 = fn1();
+  console.log(result1);
+  var result2 = result1();
+  console.log(result2);
+  // 可利用闭包结构解决循环添加时间的bug
+  var bthArr = document.querySelectorAll('.bth');
+  for (var i = 0; i < bthArr.length; i++) {
+    (function (index) {
+      // index变量时函数的形参，函数在每次执行时都会重新开辟内存空间来存放这个形参，所以给标签添加的点击事件中使用到的num变量都是独一无二的，num变量中的值是当前变量标签时的下标值
+      bthArr[index].onclick = function () {
+        // 匿名函数在执行时，给事件绑定了这个函数，函数中操作了一个局部变量，该函数执行时一定是全局作用域中执行的，所以为了保证在全局作用域中正常触发该函数，num变量也就变成了全局变量
+        alert(index+1);
+      }
+    })(i)
+    
+  }
+</script>
+</html>

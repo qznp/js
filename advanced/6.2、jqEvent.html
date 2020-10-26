@@ -1,0 +1,82 @@
+<!--
+ * @Descripttion: jq的事件
+ * @Date: 2020-10-16 17:56:02
+ * @LastEditTime: 2020-10-20 14:43:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">按钮</button>
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+<script>
+  // bind()事件绑定，unbind()事件解绑,3.0后被废弃
+  // $('button').bind('click',fn);
+  // $('button').unbind('click',fn);
+  // 3.0后提倡的方法：on  off
+  // on('click', '.btn', fn)
+
+  // change();失去焦点（单选框，复选框，下拉菜单）
+  // blur();
+  // mouseover,mouseout
+
+  // 复合事件：hover(),复合了鼠标的移入和移除两个事件
+  // $('div').hover(function () {
+  //   // 鼠标移入
+  // }, function () {
+  //   // 鼠标移出
+  // })
+
+  // 复合事件：toggle(),在1.8和之前版本中，复合了奇偶次点击事件，在1.9和之后的版本中，toggle方法用于jq的动画
+    // $('div').toggle(function () {
+  //   
+  // }, function () {
+  //   
+  // })
+
+  // 事件对象
+  // $('#btn').click(function (event) {
+  //   // 通过jq获取到的事件对象和js获取到事件对象所具备的属性基本一致
+  //   console.log(event.type);
+
+  //   // 在jq事件体系中target属性保存的是触发该事件的标签；currentTarget属性保存的是响应的标签
+  //   console.log(event.target);
+  //   console.log(event.currentTarget);
+  // })
+
+  // 事件委托：事件目标自身不处理时间，而是把处理任务委托给其父元素或者祖先元素，甚至根元素（document）
+  // 事件委托中，通过父标签响应子标签的事件时，只有被选择器匹配的标签触发的事件，才能执行父标签的事件函数，如果触发事件的子标签并没有被选择器匹配，则父标签的事件函数不会执行。
+  // $('#div').on('click', 'button', function (ev) {
+  //   console.log(ev.target.tagName);
+  // })
+  
+  // 事件的模拟执行：由代码自动触发本来应该由用户触发的事件
+  // trigger():由标签对象调用，参数是要触发的事件名
+  // $('#btn').trigger('click');
+
+  // 命名空间：在jq体系中，我们可以给事件名添加各种各样的自定义后缀，这样即使是同一个事件，我们也能通过后缀区分（即使是不同事件，但是拥有相同的后缀，也可以一次性获取到这些不同的事件），给事件名添加后缀这种行为就是扩充事件名而命名空间
+  // $('#btn1').on('click', function () {
+  //   alert(1);
+  // })
+  // $('#btn1').on('click.d', function () {
+  //   alert(2);
+  // })
+  // $('#btn3').off('.d')
+
+  // 自定义事件
+  $('#btn').on('hi', function () {
+    alert(1);
+  })
+  $(document).on('keydown', function (ev) {
+    var e = ev || event;
+    if (e.keyCode == 13) {
+      $('#btn').trigger('hi');
+    }
+  })
+</script>
+</html>

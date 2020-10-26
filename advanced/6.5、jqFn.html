@@ -1,0 +1,79 @@
+<!--
+ * @Descripttion: jq的工具函数以及插件
+ * @Date: 2020-10-26 10:10:42
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-10-26 10:53:27
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+// 借助extend开发工具函数的参数
+<script src="./jquery.NBlog.js"></script>
+<script>
+  // 1、jq的工具函数
+  // type():获取参数的数据类型，数据类型的丰富程度比typeof高
+  // var a = $.type([1,2,3]);
+  // console.log(a);
+
+  // trim():去除字符中的前后空格
+  // var str = $.trim(' zhang san ');
+  // console.log(str);
+
+  // inArray():在指定数组中查找指定的元素，如果找到，就返回元素下标，如果找不到，就返回-1
+  // var index = $.inArray('hello',[1,2,'hello',4]);
+  // console.log(index);
+
+  // proxy():修改this指针指向,第一个参数：用到的this的函数名；第二个参数：this要指向的对象
+  // 普通函数调用时，修改函数中的this指向
+  function hello() {
+    console.log(this);
+  }
+  var per = {
+    name:'张三'
+  }
+  // $.proxy(hello,per)(1,2);
+  // hello();
+
+  // 通过事件触发的函数，修改事件函数中this指针的指向
+  // $(document).click($.proxy(hello, per ,1 ,2));
+  // hello();
+
+  // parseJSON():把严格模式的json字符串转为对象类型
+  // $.parseJSON();
+
+  // noConflict():修改$关键字符，调用该方法后，会把$代表的对象返回到另一个变量中，由该变量代替$调用jq中的方法（使用场景：如果其他框架中也用到了$符号，为了避免冲突，需要使用该方法把jq中的$换成其他的字符）
+  // var a = $.noConflict();
+  // var str = a.trim(' aa ');
+  // console.log(str);
+
+  // extend:可向jq框架添加新的函数
+  // $.extend({
+  //   hello: function () {
+  //     console.log('hello');
+  //   }
+  // })
+  // $.hello();
+  // 如果extend()方法中只有一个对象参数，则表示把改对象中的方法合并在$(jq框架)中
+  // 如果extend()方法中有多个对象参数，则表示把这多个对象合并到一个对象中，然后返回第一个对象。这样返回出来的新对象就具备了参数所有的属性和属性值，如果属性值有冲突，谁最后合并，就用谁的值
+  // var obj = $.extend({
+  //   name:'战三',
+  //   gender: 'man',
+  //   age: 18
+  // }, {
+  //   name: 'lisi'
+  // })
+  // console.log(obj);
+
+  // 借助extend开发工具函数的参数
+  // $.NBlog('哈哈');
+  // NBlog('哈哈');
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!--
+ * @Descripttion: 继承：call\apply
+ * @Date: 2020-10-16 11:26:29
+ * @LastEditTime: 2020-10-16 12:04:29
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // call、apply方法
+  // call函数：通常用来修改this指针的指向，该函数需要两类参数，第一类参数是要修改指针指向的新对象，该参数只有一个，为对象类型的数据，放在实参列表的第一个位置，第二类参数是被调用函数所需要的形参，依次在第一个参数后按顺序给被调用函数传参
+  function hi(a,b) {
+    console.log(a);
+    console.log(b);
+    console.log(this);
+  }
+  // hi.call(document,12,'hh');
+
+  // apply
+  // hi.apply(document,[12,'hi']);
+  // 1、继承应用
+  // function createAnimal(name, age) {
+  //   this.name = name;
+  //   this.age = age;
+  //   this.sayHi = function () {
+  //     alert('打招呼');
+  //   }
+  // }
+  // function createDog(name, age, gender) {
+  //   // 通过继承获取到另一个构造函数中的属性和方法（从父类中获取数据）
+  //   // createAnimal即是父类被继承者，又是被调用者
+  //   createAnimal.call(this, name, age);
+  //   this.gender = gender;
+  //   this.eatFood = function () {
+  //     alert('啃骨头');
+  //   }
+  // }
+  // var dog1 = new createDog('aa', 13, 'man');
+  // console.log(dog1.age);
+  // console.log(dog1.gender);
+
+  // 2、原型链继承
+  // function createAnimal(name, age) {
+  //   this.name = name;
+  //   this.sayHi = function () {
+  //     alert('hi');
+  //   }
+  //   createAnimal.prototype.age = age;
+  //   createAnimal.prototype.sayBye = function () {
+  //     alert('bye')
+  //   }
+  // }
+  // function createDog(name, age, hobby) {
+  //   this.hobby = hobby;
+  // }
+  // // 创建父类对象
+  // var animal = new createAnimal('aa', 8);
+  // createDog.prototype = animal;
+  // // 因为让父类对象做了子类，所以子类原型中的constructor指针不再指向子类函数，而是指向父类函数
+  // createDog.prototype.constructor = createDog;
+  // var dog2 = new createDog('bb', 9, 'hi');
+  // console.log(dog2.name);
+  // instanceof 查看dog2是否属于createDog，属于返回true
+  // console.log(dog2 instanceof createDog);
+
+  // 3、组合继承:通过call来继承父类的实例属性，通过原型链来继承父类中的原型方法
+  // function createAnimal(name, age) {
+  //   this.name = name;
+  //   this.age = age;
+  // }
+  // createAnimal.prototype.sayHi = function () {
+  //   alert('hi');
+  // }
+  // function createDog(name, age, gender) {
+  //   // call继承属性
+  //   createAnimal.call(this, name, age);
+  //   this.gender = gender;
+  // }
+  // // 通过原型链获取到方法
+  // var animal = new createAnimal();
+  // createDog.prototype = animal;
+  // createDog.prototype.constructor = createDog;
+  // var dog1 = new createDog('aa', 3, 'man');
+  // console.log(dog1.name);
+  // dog1.sayHi();
+
+  // 利用原型链简化代码
+  var arr = [12,23,24];
+  Array.prototype.sum = function () {
+    var sum = 0;
+    for (var item of this) {
+      sum += parseInt(item)
+    }
+    return sum;
+  }
+  console.log(arr.sum());
+</script>
+</html>

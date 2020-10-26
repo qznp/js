@@ -1,0 +1,116 @@
+<!--
+ * @Descripttion: jq动画
+ * @Date: 2020-10-22 16:04:29
+ * @LastEditTime: 2020-10-26 10:08:48
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .div {
+    width: 300px;
+    height: 300px;
+    font-size: 50px;
+    position: absolute;
+    border: 1px solid #000000;
+    background-color: red;
+  }
+</style>
+<body>
+  <button id='hidden' type="button" name="button">点我</button>
+    <div class="div">
+      hahahaha，一只乌鸦口渴了
+    </div>
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+<script>
+  
+  // $('button').click(function () {
+    // 在执行jq控制的让标签出现，小时的相关动画时，不能通过修改css颜色表的形式控制标签的其他样式，不然可能导致动画效果与设计的不一致（所有的css修改操作，要在动画执行结束后进行，在动画的回调函数中修改）
+    // 1、显示隐藏动画
+    // show();hide()
+    // if ($('div').css('display') === 'none') {
+    //   $('div').show(1000);
+    // } else {
+    //   $('div').hide(1000);
+    // }
+    // toggle():复合显示和隐藏动画（1.8之后功能）
+    // $('div').toggle(1000);
+
+    // 2、淡入淡出：fadeOut(a,b),fadeIn(a,b)
+    // if ($('div').css('display') === 'none') {
+    //   $('div').fadeIn(1000,function () {})
+    // } else {
+    //   $('div').fadeOut(1000,function () {})
+    // }
+    // 复合淡入淡出的方法
+    // $('div').fadeToggle(1000,function () {})
+
+    // 3、滑动动画
+    // if ($('div').css('display') === 'none') {
+    //   $('div').slideDown(1000);
+    // } else {
+    //   $('div').slideUp(1000);
+    // }
+    // $('div').slideToggle(1000);
+
+    // 4、自定义动画：animate()
+    // 参数一：标签结束后，最终的css样式（必填）
+    // 参数二：动画执行时间（可选），如果不传该参数，则标签变化时没有动画效果
+    // 参数三：动画执行结束的回调函数（可选），如果有逻辑需要在动画结束之后执行，则可以写在该回调函数中
+    // $('div').animate({
+    //   width:'600px',
+    //   height:'600px'
+    // },3000,function () {
+    //   console.log('动画结束');
+    // })
+    // $('div').animate({
+    //   left:'300px'
+    // },1000).animate({
+    //   left:'0',
+    //   top:'200px'
+    // })
+    // 累加、累减动画：在通过jq动画修改标签的css值时，在该值钱添加“+=”“-=”符号，即可实现累加、累减动画
+    // $('div').animate({
+    //   left:'+=100px'
+    // },3000)
+  // })
+
+  // 5、stop():代码执行到stop（）方法中，会终止方法调用标签上的动画进程
+  // stop(true,true):第一个参数，表示是否清空当前动画队列（注意：清空动画队列时，排队的动画在CPU中注册的动画事件不会被清理掉，所以最后效果是要等待一段时间才能看到其他动画样式）
+  //第二个参数,让当前正在执行的动画达到最后一帧的样式上，然后继续执行后面的效果
+  // 通过stop（）方法结束
+  // $('div').hover(function () {
+  //   $('div').stop();
+  //   $('div').animate({
+  //     width:'600px'
+  //   },3000)
+  // },function () {
+  //   $('div').stop();
+  //   $('div').animate({
+  //     width:'300px'
+  //   },3000)
+  // })
+
+  // 6、判断div是否处于动画状态中，使用is()方法判断标签所处的状态，:animate,是由jq体系指定的一种伪装，表示标签处于动画状态
+  // if (!$('div').is(':animated')) {
+  //   $('div').animate({
+  //     width:'+=100px'
+  //   }, 3000)
+  // }
+
+  // 7、delay():延迟动画
+  $('button').click(function () {
+    $('div').delay(2000).animate({
+      width:'800px'
+    }, 3000).delay(2000).animate({
+      height:'800px'
+    })
+  })
+  
+</script>
+</html>

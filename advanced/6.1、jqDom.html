@@ -1,0 +1,82 @@
+<!--
+ * @Descripttion: jq的dom操作
+ * @Date: 2020-10-16 17:18:53
+ * @LastEditTime: 2020-10-16 17:55:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+<script>
+      // DOM操作的三大类
+    // 1、核心DOM：指获取DOM树种的标签、创建新标签、拼接标签、通过函数修改标签属性等等行为就是核心DOM操作。核心DOM下的方法可以用在XML文档中和HTML文档中
+    // 2、HTML DOM：指通过获取到的标签、修改、设置访问该标签下的属性的操作。HTML DOM只能用于HTML文档
+    // 3、CSS DOM：指通过获取到的标签下的style属性，来修改标签的css演示的操作，CSS DOM只能用于HTML文档
+    
+    // 获取标签内容的方法
+    // $('p').text();
+    // $('p').html();
+    
+    // 获取表单元素的文本
+    // $('input').val();
+    
+    // attr():获取标签下的属性值，只有出现在标签内部的属性才能获取属性对应的值
+    // removeAttr():删除指定标签的属性
+    // addClass():给标签添加class名
+    // removeClass():删除标签的class值
+    // hasClass():判断标签是否存在指定的class值
+    // toggleClass():自动判断标签是否有指定的class值，如果有就自动删除，如果没有就自动添加
+
+    // 获取标签的坐标数据，坐标原点是文档的左上角点
+    // var point = $('div').offset();
+    // 修改标签的坐标位置
+    // $('div').offset({
+    //   top:500,
+    //   left:500
+    // })
+
+    // 获取定位标签相对于定位父级标签的坐标,不能修改定位标签的坐标
+    // var point = $('div').position();
+
+    // 获取滚动条的位置
+    // scrollTop()：由滚动条所属的标签调用方法，不传参，表示获取页面卷起来的尺寸；传参，参数是number类型的整数，表示设置页面卷起来的高度
+
+    // 创建新标签
+    var pTag = '<p>123</p>';
+    // 通过js的DOM操作向页面中拼接元素，只能拼接节点类型的值
+    // a.append(b);把b标签拼接在a标签内部结尾的位置
+    // a.appendTo(b);把a标签添加到b标签中（把a拼接进b的内部结尾部分）
+    // a.prepend(b);在a标签内部的开始位置凭借b标签
+    // a.after(b);在a标签之后拼接b标签（ab是兄弟关系）
+    // a.before(b);在a标签之前的位置拼接b标签（ab是兄弟关系）
+    
+    // index:下标，elem:节点（可省，也可用this代替）
+    // $('p').each(function (index, elem) {
+      
+    // })
+
+    // 包裹节点的操作
+    // a.wrap(b);让b标签当做a标签的父级，如果a标签有多个，则每一个标签都会有一个独立的父级b
+    // $('li').wrap('<ul></ul>');
+    // a.wrapAll(b);让b标签当做a标签的父级，如果a标签有多个，则所有的a标签会共用一个父级b,如果a的DOM结构中混入了其他标签，会先把其他标签移在所有a标签之后，然后再用b包裹
+    // a.wrapInner(b);在a标签内部添加b标签，让b标签当做a标签原来子标签的父级；a是爷爷级、b是父级、原来a的自己子级变成孙子级
+    // $('ul').wrapInner('<nav></nav>');
+
+    // remove();删除调用该方法的标签，并且会把该标签保存下来，以备后期拼接使用
+    // remove()和detach()删除标签的区别：
+    // remove()如果删除具备事件函数的标签，则标签的事件函数会一同解除绑定，吧标签添加回来时，就没有对应的事件函数了
+    // detach()如果删除具备事件函数的标签，则只是在DOM结构中把标签移除，该标签绑定的事件函数不会移除，把标签添加回来，事件函数照样的触发
+    // a.clone():拷贝DOM树中的a节点，如果a节点有事件函数，而且需要一起拷贝，这需要传参：true
+    // empty();清空节点操作
+    // a.replaceWith(b);用b标签替换a标签
+    // a.replaceAll(b);用a标签替换b标签
+
+</script>
+</html>

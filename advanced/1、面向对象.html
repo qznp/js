@@ -1,0 +1,187 @@
+<!--
+ * @Descripttion: 面向对象
+ * @Date: 2020-10-15 11:17:08
+ * @LastEditTime: 2020-10-16 11:27:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 从编程思想角度理解面向对象
+  // 面向对象编程思想，关注的是解决问题所需要的对象。先创建对象，然后调用对象下的属性和方法来解决问题。
+  // 面向过程编程思想：关注的是解决问题的步骤
+  // 面向对象思想是从面向过程思想中衍生出来的思想
+
+  // 一般在小型程序（逻辑简单，功能不复杂的程序中）使用面向过程思想解决问题，代码量少，这种思想实现难度低
+  // 当遇见复杂程序时，一般使用面向对象思想开发，有利于管理各个功能块，以及后期功能变更时，只需要修改相关对象即可
+
+  // 从编程语言角度理解面向对象开发语言
+  // 符合面向对象开发语言的概念的编程语言，必须具备以下概念：类、对象；以及以下特征：封装、继承、多态。而且再创建对象时，必须是通过类创建出来的
+
+  // 一般程序需要使用面向对象思想编程，则必须选用面向对象的语言进行开发
+
+  // 在js中如何使用面向对象思想？
+  // js是一门基于对象的语言，而不是面向对象的语言。当需要使用js代码实现面向对象编程思想时，就使用js代码来模拟面向对象语言的各种概念、特征。
+
+  // 类和对象
+  // 类（class）是一堆具有相同属性、方法的数据类型的集合，对象是把类（class）的属性和方法具体化后的一种数据类型
+  // 在面向对象语言中，必须通过类来创建对象，而js中没有类的概念，所以就是用“构造函数”来模拟（充当、代替）面向对象语言中的“类”，通过构造函数来创建对象。
+
+  // 属性和方法
+  // 属性就是属于某个对象的变量，该变量只能通过它所归属的对象调用、访问，其他对象无法获取到；
+  // 方法就是属于某个对象的函数，改函数只能通过它所属的对象调用、访问，其他对象无法获取到
+
+  // 在js中，因为直接通过“var”定义的变量、函数都默认属于window对象，所以js就有了“基于对象”这个语言名称
+
+  // 面向对虾干开发语言的单打特征：封装、继承、多态
+  // 封装：把一堆实现某个功能的代码屏蔽起来，用一个简单的字符代替，将来在使用时，只关注哪些字符可以实现哪项功能，只需调用即可，不关注内部是如何实现的
+  // 继承：类与类之间一旦声明了继承关系，如果A继承自B（A是通过B创建出来的自雷，B是父类，A是子类），B类中拥有的属性、方法，在A类中不用再次创建，因为子类可以获取父类的属性和方法，这种关系就是继承
+  // 多态：各个对象在获取到创建这个对象的类中所有的方法时，方法是同一个方法，但是因为是由不同对象调用的，所以这些方法执行结果可能不同（同一个类穿件的不同对象，具备同样的方法，但是因为对象不同，所以方法执行的结果也可能不同），这种行为就是多态
+
+  // 一、js创建对象的方法
+  // 1、直接创建
+  var person = {
+    name:'zhangsan',
+    age:12,
+    sayHi:function () {
+      alert('hi');
+    }
+  }
+  // console.log(person.name);
+  // person.sayHi();
+  // 2、使用工厂方法创建对象
+  // function createPerson(name,age) {
+  //   var per = {
+  //     name: name,
+  //     age: age,
+  //     per: function () {
+  //       alert('hi');
+  //     }
+  //   }
+  //   return per;
+  // }
+  // // 使用工厂函数，获取新创建的对象
+  // var person1 = createPerson('zhangsan', 12); 
+  // console.log(person1);
+
+  // 直接创建对象：当创建少数对象时，使用字面量方式创建对象，简单、直接；
+  // 工厂函数创建对象：当需要创建多个不同对象时，使用工厂方法创建，能节省冗余的代码。
+
+  // 通过构造函数创建对象
+  function createPerson(name, age) {
+    this.name = name;
+    this.age = age;
+    this.sayHi = function () {
+      alert('hi');
+    }
+  }
+  // 使用new来调用构造函数的目的：
+  // 当引擎执行到new关键字时，会在内存中开辟一段内存空间，并且new关键字会把内存空间的首地址返回出去，这样就可以通过接受返回值的变量来访问这段内存空间
+  // 在构造函数中，添加属性、方法是添加在this指针上的，this指针的指向取决于调用者；构造函数是由new调用的，而new又开辟了新的内存空间，所以this指针就执行这段内存空间，指向this指针绑定的属性和方法，最后就添加在了这段内存中。 
+  var person2 = new createPerson('zhansan',13);
+  // console.log(person2);
+  var person3 = new createPerson('zhansan',14);
+  // console.log(person3);
+  // 通过构造函数创建出来的对象，可以通过indetanceof操作获取到创建该对象的类（函数）
+  // console.log(person2.sayHi == person3.sayHi);
+
+  // 3、通过原型创建对象
+  // 优势：可以吧对象公有的数据统一托管在原型中，以达到节约内存的目的
+  function createAnimal(name, age) {
+    // 把所有对象共有的相同属性和所有方法全部存放在原型中，以达到节约内存的目的
+    // 把各自对象值不同的属性，放在实例中，由对象自己开辟内存空间，维护自己都有的值。
+    this.name = name;
+    this.age = age;
+    createAnimal.prototype.sayHi = function () {
+      alert('旺旺');
+    }
+  }
+
+  // 4、动态原型创建对象
+  function createCat(name, age) {
+    this.name = name;
+    this.age = age;
+    if (typeof(createCat.prototype.sayHi) != 'function') {
+      createCat.prototype.sayHi = function () {
+        alert('米米米');
+      }
+    }
+  }
+  var cat = new createCat('xiaobai', 3);
+  // 二、访问对象的属性
+  // 通过点语法的方式：对象名.属性名
+  // console.log(cat.name);
+  // 通过下标名的方式访问属性：对象名['属性名']
+  // console.log(cat['age']);
+  // 修改属性的值：对象名.属性名 = 赋新值
+  cat.name = 'cat';
+  // console.log(cat.name);
+  // 删除对象下的属性：delete
+  delete cat.name;
+  // console.log(cat);
+
+  // 快速遍历
+  // for...in:遍历属性下标，主要用来遍历对象
+  // for...of:主要用来遍历数组
+
+  // function powFun(num) {
+  //   this.num = num;
+  //   this.pow = function () {
+  //     return Math.pow(this.num,2);
+  //   }
+  // }
+  // var obj = new powFun(3);
+  // var result = obj.pow();
+  // console.log(result);
+
+  // 三、对象属性判断
+  function createPerson(name, age) {
+    this.name = name;
+    this.age = age;
+    createPerson.prototype.yanzheng = function (property) {
+      // in运算符：只要该对象能访问到指定属性，都会返回true
+      if (property in this) {
+        // 每创建出来的对象都具备hasOwnProperty()方法，该方法可以验证指定属性是否是该对象（实例）自己维护的属性
+        if (!this.hasOwnProperty(property)) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    }
+  }
+  createPerson.prototype.gender = '男';
+  createPerson.prototype.sayHi = function () {
+    alert('hello');
+  }
+  var person4 = new createPerson('zhan0', 12);
+  person4.yanzheng('name');
+  var person5 = new createPerson('zhan0', 12);
+  // in运算符：只要该对象能访问到指定属性，都会返回true
+  console.log('gender' in person5);
+  // 每创建出来的对象都具备hasOwnProperty()方法，该方法可以验证指定属性是否是该对象（实例）自己维护的属性
+  console.log(person5.hasOwnProperty('gender'));
+
+  // 验证gender属性时原型属性
+  if ('gender' in person5) {
+    if (!person5.hasOwnProperty('gender')) {
+      // 原型属性：通过原型添加在构造函数中的属性
+      console.log('属性为原型属性');
+    } else {
+      // 实例属性：直接写在构造函数中的属性
+      console.log('属性为实例属性');
+    }
+  } else {
+    console.log('不存在');
+  }
+</script>
+</html>
