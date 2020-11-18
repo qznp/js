@@ -11,3 +11,5 @@ js 的问题总结
 ## base 文件内为 js 基础
 
 ## advanced 文件内为 js 进阶
+
+## es6 文件内为 es6 语法

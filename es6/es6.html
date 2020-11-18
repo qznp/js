@@ -1,0 +1,36 @@
+<!--
+ * @Descripttion: es6环境搭建
+ * @Date: 2020-10-26 11:25:21
+ * @LastEditTime: 2020-11-16 17:36:49
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 1、建立一个文件：npm init -y(表示默认全部配置)
+  // 2、全局将es6文件转换为es5的babel-cli插件：npm install -g babel-cli
+  // 3、下载es5打包工具babel-preset-es2015:npm install --save-dev(本地安装) babel-preset-es2015 babel-cil
+  // 4、在根目录创建一个.babelrc文件，文件内容：
+  // {
+  //   "presets": [
+  //     "es2015"
+  //   ],
+  //   "plugins": []
+  // }
+  // 5、转换命令：babel src/index.js(要转换的文件位置) -o dist/index.js(转换后的文件位置)
+  // 在package.json文件中配置“scripts”选项，代码如下：
+  // "scripts": {
+  //   "build": "babel src/index.js -o dist/index.js"
+  // }
+
+  // 运行命令：npm run bulid
+</script>
+<script type="module" src="./page/11.promise.js"></script>
+</html>
