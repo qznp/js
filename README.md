@@ -17,3 +17,5 @@ js 的问题总结
 ### input.html:js 防抖与节流
 
 ### formData.md formData 对象的使用
+
+### copy.md 浅拷贝和深拷贝
